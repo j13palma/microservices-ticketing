@@ -6,8 +6,7 @@ import { signupRouter } from './routes/signup';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { currentUserRouter } from './routes/current-user';
-import { errorHandler } from './middlewares/error-handler';
-import { NotFoundError } from './errors/not-found-error';
+import { errorHandler, NotFoundError } from '@palmpass/common';
 
 const app = express();
 app.set('trust proxy', true);
