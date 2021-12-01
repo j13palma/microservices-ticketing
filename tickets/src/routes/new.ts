@@ -2,6 +2,9 @@ import express, { Request, Response } from 'express';
 import { requireAuth, validateRequest } from '@palmpass/common';
 import { body } from 'express-validator';
 import { Ticket } from '../models/ticket';
+import { TicketCreatedPublisher } from '../events/publisher/ticket-created-publisher';
+import { idText } from 'typescript';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -23,9 +26,15 @@ router.post(
       price,
       userId: req.currentUser!.id,
     });
-    await ticket.save().then((result) => {
-      res.status(201).send(result);
+    await ticket.save();
+    await new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: ticket.version,
     });
+    res.status(201).send(ticket);
   }
 );
 

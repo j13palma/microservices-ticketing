@@ -1,6 +1,4 @@
-import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { app } from '../app';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
