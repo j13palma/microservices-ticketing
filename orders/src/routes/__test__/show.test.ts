@@ -1,11 +1,13 @@
 import request from 'supertest';
-import { app } from '../app';
-import { Order, OrderStatus } from '../models/orders';
-import { Ticket } from '../models/tickets';
+import { app } from '../../app';
+import { Order, OrderStatus } from '../../models/orders';
+import { Ticket } from '../../models/tickets';
+import mongoose from 'mongoose';
 
 it('fetches the order', async () => {
   // Create a ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 20,
   });
@@ -31,6 +33,7 @@ it('fetches the order', async () => {
 it('returns an error if one user requests an order that is not theirs', async () => {
   // Create a ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: 'concert',
     price: 20,
   });
