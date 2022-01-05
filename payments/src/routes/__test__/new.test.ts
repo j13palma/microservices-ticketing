@@ -69,7 +69,7 @@ it('returns a 201 with valid inputs', async () => {
     userId,
     version: 0,
     price,
-    status: OrderStatus.Canceled,
+    status: OrderStatus.Created,
   });
   await order.save();
 
