@@ -1,7 +1,15 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError } from '@palmpass/common';
+import {
+  validateRequest,
+  NotFoundError,
+  requireAuth,
+  NotAuthorizedError,
+  BadRequestError,
+} from '@palmpass/common';
 import { Ticket } from '../models/ticket';
+import { TicketUpdatedPublisher } from '../events/publisher/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -21,12 +29,23 @@ router.put(
     if (!ticket) {
       throw new NotFoundError();
     }
+    if (ticket.orderId) {
+      throw new BadRequestError('Cannot edit a reserved ticketl;p');
+    }
     if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
     }
 
     ticket.set({ title: req.body.title, price: req.body.price });
     await ticket.save();
+
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+      version: ticket.version,
+    });
     res.send(ticket);
   }
 );

@@ -23,7 +23,7 @@ const signup = () => {
   return (
     <form onSubmit={onSubmit}>
       <h1>Sign up</h1>
-      <div className='form-group'>
+      <div className='mb-3'>
         <label htmlFor='email'>Email address</label>
         <input
           type='email'
@@ -35,7 +35,7 @@ const signup = () => {
           placeholder='Enter email'
         />
       </div>
-      <div className='form-group'>
+      <div className='mb-3'>
         <label htmlFor='password'>Password</label>
         <input
           type='password'
