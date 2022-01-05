@@ -25,6 +25,7 @@ router.post(
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
     }
+
     const userJwt = jwt.sign(
       {
         id: existingUser.id,

@@ -21,12 +21,14 @@ const Header = ({ currentUser }) => {
 
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <Link href='/'>
-        <a className='navbar-brand'>PalmPass</a>
-      </Link>
+      <div class='container-fluid'>
+        <Link href='/'>
+          <a className='navbar-brand'>PalmPass</a>
+        </Link>
 
-      <div className='d-flex justify-content-end'>
-        <ul className='nav d-flex align-items-center'>{links}</ul>
+        <div className='d-flex justify-content-end'>
+          <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>{links}</ul>
+        </div>
       </div>
     </nav>
   );
