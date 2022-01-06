@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const index = ({ currentUser, tickets }) => {
   console.log(currentUser);
-  console.log('Starting...');
+
   return (
     <div>
       <h1>Tickets</h1>
