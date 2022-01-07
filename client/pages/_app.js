@@ -3,11 +3,12 @@ import buildClient from '../api/build-client';
 import Header from '../components/header';
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
+  const email = currentUser ? currentUser.email : null;
   return (
     <div>
       <Header currentUser={currentUser} />
       <div className='container'>
-        <h1>Howdy {currentUser.email}</h1>
+        <h1>Howdy {email}</h1>
         <Component currentUser={currentUser} {...pageProps} />
       </div>
     </div>
