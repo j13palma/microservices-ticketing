@@ -21,7 +21,7 @@ const Header = ({ currentUser }) => {
 
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <div class='container-fluid'>
+      <div className='container-fluid'>
         <Link href='/'>
           <a className='navbar-brand'>PalmPass</a>
         </Link>
