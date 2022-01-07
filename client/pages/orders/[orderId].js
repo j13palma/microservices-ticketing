@@ -30,6 +30,7 @@ const OrderShow = ({ order, currentUser }) => {
     return <div>Order Expired</div>;
   }
 
+  console.log(order.ticket.price * 100);
   return (
     <div>
       Time left to pay: {timeLeft} seconds
