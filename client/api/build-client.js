@@ -3,7 +3,7 @@ import axios from 'axios';
 const buildClient = ({ req }) => {
   if (typeof window === 'undefined') {
     return axios.create({
-      baseURL: 'http://wwww.juliocodes.com/',
+      baseURL: 'http://www.juliocodes.com/',
       headers: req.headers,
     });
   } else {
